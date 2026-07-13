@@ -11,7 +11,17 @@ app.use(clerkMiddleware())
 app.use(express.json())
 app.use(express.urlencoded({extended:true})) // For parsing the form data (like html)
 app.get("/", (req,res)=>{
-    res.json({success:true})
+    res.json({
+        message:"Welcome to product store",
+        endpoints:{
+            user:"api/users",
+            product:"api/product",
+            comment:"api/comment"
+        }
+
+    })
 })
 
-app.listen(ENV.PORT, ()=>{console.log("server is running file on PORT: 3000")})
+app.listen(ENV.PORT, () => {
+  console.log(`Server is running on port ${ENV.PORT}`);
+});
