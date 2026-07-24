@@ -34,7 +34,7 @@ export const upsertUser = async(data:NewUser)=>{
 
 
 // Product creation and updation
-export const createProducts = async (data: NewProduct)=>{
+export const createProduct = async (data: NewProduct)=>{
     const [product] = await db.insert(products).values(data).returning()
     return product
 }
@@ -77,7 +77,7 @@ export const updateProduct = async (id:string, data: Partial<NewProduct>) =>{
     return product;
 }
 
-export const deleteProducts = async(id:string)=>{
+export const deleteProduct = async(id:string)=>{
     const existingProduct = await getProductById(id)
     if(!existingProduct){
         throw new Error(`Product with id ${id} not found`)
