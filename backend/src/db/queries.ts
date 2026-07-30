@@ -27,8 +27,16 @@ export const upsertUser = async(data:NewUser)=>{
     // }
     // return createUser(data)
 
-    const [user] = await db.insert(users).values(data).onConflictDoUpdate({target: users.id, set: data})
-    .returning()
+    const [user] = await db.insert(users).values(data).onConflictDoUpdate({
+            target: users.id,
+            set: {
+                email: data.email,
+                name: data.name,
+                imageUrl: data.imageUrl,
+                updatedAt: new Date(), // manually set updatedAt on conflict
+            },
+        })
+        .returning();
     return user
 }
 

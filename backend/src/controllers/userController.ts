@@ -8,7 +8,7 @@ export async function syncUser(req:Request, res:Response) {
         const {userId} = getAuth(req)
         if(!userId)  return res.status(401).json({error:"Unauthrized"})
 
-        const {name, email, imageUrl} = req.body();
+        const {name, email, imageUrl} = req.body;
         if(!name || !email || !imageUrl ){
             return res.status(400).json({error:"Email, name, and imageURL are required"})
         }
@@ -19,8 +19,13 @@ export async function syncUser(req:Request, res:Response) {
             imageUrl
         })
         res.status(200).json(user)
-    }catch(error){
-        console.error("Error syncing user", error)
-        res.status(500).json({error: "Faild to sync user"})
+    }catch (error) {
+        console.error("Error syncing user:", error);
+        // Also log the full error object
+        if (error instanceof Error) {
+            console.error("Message:", error.message);
+            console.error("Stack:", error.stack);
+        }
+        res.status(500).json({ error: "Failed to sync user" });
     }
 }

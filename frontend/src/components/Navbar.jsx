@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router"
 import { SignInButton, SignOutButton, SignUpButton, UserButton, useAuth } from '@clerk/react' 
+
 import { ShoppingBagIcon, PlusIcon, UserIcon } from 'lucide-react'
 import ThemeSelector from './ThemeSelector'
 function Navbar() {
